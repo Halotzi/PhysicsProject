@@ -6,8 +6,8 @@ public class ThrowingKnife : MonoBehaviour
 {
     [SerializeField] private float _powerZ; 
     [SerializeField] private float _powerY;
-    [SerializeField] private float _gravity;
-    [SerializeField] private float _mass;
+    private float _gravity;
+     private float _mass;
 
     private Vector3 _stoppingPosition;
     private bool _inMovement=true;
@@ -29,17 +29,20 @@ public class ThrowingKnife : MonoBehaviour
 
     private void Update()
     {
-        if((_powerZ !=0 || _powerY != 0)&& _inMovement)
+        if ((_powerZ != 0 || _powerY != 0) && _inMovement)
         {
             _time += Time.deltaTime;
             MoveObject();
         }
 
-        else
+        else if (_time < 20f)
         {
+            _time += Time.deltaTime;
             transform.position = _stoppingPosition;
-            _time = 0;
         }
+
+        else
+            Destroy(this.gameObject);
     }
 
     public void MoveObject()
@@ -54,6 +57,9 @@ public class ThrowingKnife : MonoBehaviour
     {
         _inMovement = false;
         _stoppingPosition = transform.position;
+        PlayUI.Instance.KnifeThrown++;
+        PlayUI.Instance.UpadteUI(6, PlayUI.Instance.KnifeThrown);
+        _time = 0;
     }
 
 }

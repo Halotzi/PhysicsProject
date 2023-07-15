@@ -6,11 +6,11 @@ public class ThrowingBomb : MonoBehaviour
 {
     [SerializeField] private float _powerZ;
     [SerializeField] private float _powerY;
-    [SerializeField] private float _gravity;
-    [SerializeField] private float _mass;
-    [SerializeField] private float _explosionForce;
-    [SerializeField] private float _explosionRadius;
     [SerializeField] private LayerMask _effectedObject;
+     private float _gravity;
+     private float _mass;
+     private float _explosionForce;
+     private float _explosionRadius;
 
 
 
@@ -60,6 +60,9 @@ public class ThrowingBomb : MonoBehaviour
         _inMovement = false;
         _stoppingPosition = transform.position;
         Explode();
+        PlayUI.Instance.BombThrown++;
+        PlayUI.Instance.UpadteUI(5, PlayUI.Instance.BombThrown);
+        Destroy(this.gameObject);
     }
 
     private void Explode()

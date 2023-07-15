@@ -15,6 +15,9 @@ public class PlayUI : MonoBehaviour
     [SerializeField] TMP_Text _bombText;
     [SerializeField] TMP_Text _knifeText;
 
+    public int KnifeThrown;
+    public int BombThrown;
+
     private void Awake()
     {
         Instance = this;
@@ -32,10 +35,12 @@ public class PlayUI : MonoBehaviour
         _throwPowerText.text = ThrowSettings.Instance.ThrowPower.ToString();
         _explosionForceText.text = ThrowSettings.Instance.ExplosionForce.ToString();
         _explosionRadiusText.text = ThrowSettings.Instance.ExplosionRadius.ToString();
+        _bombText.text="0";
+        _knifeText.text="0";
     }
 
     /// <summary>
-    /// ParameterID: 0=Mass, 1=Garvity, 2=Throw Power, 3=ExplosionForce, 4=ExplosionRadius
+    /// ParameterID: 0=Mass, 1=Garvity, 2=Throw Power, 3=ExplosionForce, 4=ExplosionRadius, 5= Bomb Text, 6=Knife Text
     /// </summary>
     /// <param name="parameterID"></param>
     /// <param name="newNumber"></param>
@@ -46,10 +51,10 @@ public class PlayUI : MonoBehaviour
             case 0: _massText.text = newNumber.ToString(); break;
             case 1: _gravityText.text = newNumber.ToString(); break;
             case 2: _throwPowerText.text = newNumber.ToString(); break;
-            case 3: _massText.text = newNumber.ToString(); break;
-            case 4: _explosionForceText.text = newNumber.ToString(); break;
-            case 5: _explosionRadiusText.text = newNumber.ToString(); break;
+            case 3: _explosionForceText.text = newNumber.ToString(); break;
+            case 4: _explosionRadiusText.text = newNumber.ToString(); break;
+            case 5: _bombText.text = newNumber.ToString(); break;
+            case 6: _knifeText.text = newNumber.ToString(); break;
         }
-
     }
 }
