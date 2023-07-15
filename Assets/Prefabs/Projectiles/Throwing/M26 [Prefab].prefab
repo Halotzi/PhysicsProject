@@ -467,10 +467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _powerZ: 0
   _powerY: 0
-  _gravity: 100
-  _mass: 50
-  _explosionForce: 5
-  _explosionRadius: 10
   _effectedObject:
     serializedVersion: 2
     m_Bits: 128

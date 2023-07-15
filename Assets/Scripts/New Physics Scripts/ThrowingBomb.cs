@@ -24,6 +24,8 @@ public class ThrowingBomb : MonoBehaviour
     {
         _mass = ThrowSettings.Instance.Mass;
         _gravity = ThrowSettings.Instance.Mass;
+        _explosionForce = ThrowSettings.Instance.ExplosionForce;    
+        _explosionRadius = ThrowSettings.Instance.ExplosionRadius;
     }
     public void Throwing(float angle, float power)
     {
@@ -38,12 +40,6 @@ public class ThrowingBomb : MonoBehaviour
         {
             _time += Time.deltaTime;
             MoveObject();
-        }
-
-        else
-        {
-            transform.position = _stoppingPosition;
-            _time = 0;
         }
     }
 
@@ -62,7 +58,7 @@ public class ThrowingBomb : MonoBehaviour
         Explode();
         PlayUI.Instance.BombThrown++;
         PlayUI.Instance.UpadteUI(5, PlayUI.Instance.BombThrown);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 
     private void Explode()
