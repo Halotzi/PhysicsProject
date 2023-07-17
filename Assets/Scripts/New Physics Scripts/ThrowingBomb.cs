@@ -63,7 +63,7 @@ public class ThrowingBomb : MonoBehaviour
 
     private void Explode()
     {
-        UnityEngine.Collider[] objectsInRange = Physics.OverlapSphere(transform.position, _explosionRadius, _effectedObject); //Taking all the Component from the sphere  radius from specific layer
+        UnityEngine.Collider[] objectsInRange = OverlapSphere(transform.position, _explosionRadius, _effectedObject); //Taking all the Component from the sphere  radius from specific layer
 
         for (int i = 0; i < objectsInRange.Length; i++)
         {
@@ -78,4 +78,29 @@ public class ThrowingBomb : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    private Collider[] OverlapSphere(Vector3 center, float radius, int layerMask = Physics.DefaultRaycastLayers)
+    {
+        List<Collider> colliders = new List<Collider>();
+        Collider[] allColliders = GameObject.FindObjectsOfType<Collider>();
+
+        foreach (Collider collider in allColliders)
+        {
+            //Chacking if the gameobject binary number is equal to the layermask number. 
+            //If the result is not equal to 0, it means that at least one bit was set to 1 in both the binary representation and the layerMask.
+            //This indicates that the current collider's layer is included in the layerMask, and therefore, it should be considered for overlap.
+            if ((1 << collider.gameObject.layer & layerMask) != 0)
+            {
+                Vector3 closestPoint = collider.ClosestPoint(center);
+                float distance = Vector3.Distance(closestPoint, center);
+
+                if (distance <= radius)
+                {
+                    colliders.Add(collider);
+                }
+            }
+        }
+        return colliders.ToArray();
+    }
+
 }
