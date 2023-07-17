@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewPlayerMovement : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class NewPlayerMovement : MonoBehaviour
         {
             Move();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(1);
     }
     private void Move()
     {
