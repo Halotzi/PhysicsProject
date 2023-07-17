@@ -76,5 +76,6 @@ public class ThrowingBomb : MonoBehaviour
             // apply force to object in range
             objectsInRange[i].GetComponent<ExploedCube>().ExplostionForce(forceDirection, _explosionForce);
         }
+        Destroy(gameObject);
     }
 }

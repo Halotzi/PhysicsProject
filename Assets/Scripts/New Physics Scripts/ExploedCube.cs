@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExploedCube : MonoBehaviour
@@ -13,6 +11,7 @@ public class ExploedCube : MonoBehaviour
     bool _exploed = false;
     public void ExplostionForce(Vector3 direction, float exploedForce)
     {
+        _currentTime = 0;
         _exploedForce = exploedForce;
         _direction = direction;
         _exploed = true;
@@ -20,19 +19,20 @@ public class ExploedCube : MonoBehaviour
 
     private void Update()
     {
-        if(_exploed)
+        if (_exploed)
             StartMoving();
 
     }
     private void StartMoving()
     {
-        _currentTime = 0;
-            transform.Translate(_direction* _exploedForce * Time.deltaTime);
-            _currentTime += Time.deltaTime;
+        transform.Translate(_direction * _exploedForce * Time.deltaTime);
+        _currentTime += Time.deltaTime;
+        if (_currentTime >= _timeForMove)
+            _exploed = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        _exploed=false;
+        _exploed = false;
     }
 }
